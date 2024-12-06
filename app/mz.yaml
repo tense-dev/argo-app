@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mz
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: git@github.com:tense-dev/argo-app.git
+    targetRevision: main
+    path: app
+    directory:
+      recurse: true
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
